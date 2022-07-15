@@ -114,6 +114,7 @@ with col2:
                         pict_path = '/app/laboratory5/test_pict/foto'+option1+'.png'
                         img = Image.open(pict_path)
                         st.image(pict_path)
+                        img.save(file_path)
             
 st.write('Пункт 3.')
 st.write('Зарисуйте полученное изображение чёрно-белой цифры из окошка в бланк отчёта. '
