@@ -87,24 +87,33 @@ st.write('Возьмите любую из предложенных цифр.'
 st.image('/app/laboratory5/pictures/digits.png')
 
 st.write('Пункт 2.')
-st.write('Поднесите цифру к видеокамере так, чтобы она занимала большую часть экрана видео в '
-         'окошке, располагалась в центре и была хорошо освещена, '
-         'а другой рукой возьмите мышь и щёлкните на кнопку под изображением, полученным с камеры, чтобы сделать снимок цифры.')
+st.write('Вам предоставляется на выбор два варианта выполнения работы.'
+         ' Вы можете самостоятельно сделать фотоснимок цифры (левая колонка), либо воспользоваться готовыми изображенями (правая колонка).')
 
 #img_file_buffer = st.camera_input("Take a picture")
 
-img_file_buffer = st.camera_input("Take picture")
-if img_file_buffer is not None:
-            img = Image.open(img_file_buffer)
-            img_array = np.array(img)
-            img_height, img_width = img_array.shape[0], img_array.shape[1]
-            img_center = int(img_width / 2)
-            left_border = int(img_center - img_height / 2)
-            right_border = int(img_center + img_height / 2)
-            img_array1 = img_array[:, left_border:right_border, :]
-            im = Image.fromarray(img_array1)
-            im.save(file_path)
-            
+col1,col2 = st.columns(2)
+with col1:
+            st.write('Одной рукой поднесите цифру к видеокамере так, чтобы она занимала большую часть экрана,'
+                     ' а другой рукой возьмите мышь и щёлкните на кнопку под изображением')
+            img_file_buffer = st.camera_input("Take picture")
+            if img_file_buffer is not None:
+                        img = Image.open(img_file_buffer)
+                        img_array = np.array(img)
+                        img_height, img_width = img_array.shape[0], img_array.shape[1]
+                        img_center = int(img_width / 2)
+                        left_border = int(img_center - img_height / 2)
+                        right_border = int(img_center + img_height / 2)
+                        img_array1 = img_array[:, left_border:right_border, :]
+                        im = Image.fromarray(img_array1)
+                        im.save(file_path)
+with col2:
+            st.write('Вы можетевыбрать любую цифру из предложенных ниже.')
+            option1 = st.selectbox('Какую цифру Вы выбираете?',('0','1','2','3','4','5','6','7','8','9'))
+            if option1 is not None:
+                        pict_path = '/app/laboratory5/test_pict/'+option1+'.png'
+                        img = Image.open(pict_path)
+                        st.image(pict_path)
             
 st.write('Пункт 3.')
 st.write('Зарисуйте полученное изображение чёрно-белой цифры из окошка в бланк отчёта. '
