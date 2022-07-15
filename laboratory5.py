@@ -92,12 +92,14 @@ st.write('Вам предоставляется на выбор два вари�
 
 #img_file_buffer = st.camera_input("Take a picture")
 
+choice1 = st.radio("Видео или готовые изображения?",('Видео', 'Изображения'))
+
 col1,col2 = st.columns(2)
 with col1:
             st.write('Одной рукой поднесите цифру к видеокамере так, чтобы она занимала большую часть экрана,'
                      ' а другой рукой возьмите мышь и щёлкните на кнопку под изображением')
             img_file_buffer = st.camera_input("Take picture")
-            if img_file_buffer is not None:
+            if choice1 == 'Видео':
                         img = Image.open(img_file_buffer)
                         img_array = np.array(img)
                         img_height, img_width = img_array.shape[0], img_array.shape[1]
@@ -109,9 +111,8 @@ with col1:
                         im.save(file_path)
 with col2:
             st.write('Вы можете выбрать любую цифру из предложенных ниже.')
-            ready_test = st.checkbox('Да')
             option1 = st.selectbox('Какую цифру Вы выбираете?',('0','1','2','3','4','5','6','7','8','9'))
-            if option1 is not None:
+            if choice1 == 'Изображения':
                         pict_path = '/app/laboratory5/test_pict/foto'+option1+'.png'
                         img = Image.open(pict_path)
                         st.image(pict_path)
