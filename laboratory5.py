@@ -154,6 +154,7 @@ with col6:
          factor = 2*value_sli / 100 #фактор изменения
          im_output = enhancer.enhance(factor)
          im_output.save(file_path)
+         st.image(file_path)   
 
 st.write('Пункт 6.')
 st.write('Нажмите на кнопку распознавания, запишите результат.')
