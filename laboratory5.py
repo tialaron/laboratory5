@@ -108,7 +108,8 @@ with col1:
                         im = Image.fromarray(img_array1)
                         im.save(file_path)
 with col2:
-            st.write('Вы можетевыбрать любую цифру из предложенных ниже.')
+            st.write('Вы можете выбрать любую цифру из предложенных ниже.')
+            ready_test = st.checkbox('Да')
             option1 = st.selectbox('Какую цифру Вы выбираете?',('0','1','2','3','4','5','6','7','8','9'))
             if option1 is not None:
                         pict_path = '/app/laboratory5/test_pict/foto'+option1+'.png'
