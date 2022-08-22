@@ -104,8 +104,8 @@ with col2:
             st.write('Вы можете выбрать любую цифру из предложенных ниже.')
             option1 = st.selectbox('Какую цифру Вы выбираете?',('0','1','2','3','4','5','6','7','8','9'))
             pict_path = '/app/laboratory5/test_pict/foto'+option1+'.png'
-            img_pict = Image.open(pict_path)
-            st.image(pict_path)
+            
+            
                   
 
 if choice1 == 'Видео' and img_file_buffer is not None: 
@@ -119,7 +119,9 @@ if choice1 == 'Видео' and img_file_buffer is not None:
             im = Image.fromarray(img_array1)
             im.save(file_path)
 if choice1 == 'Изображения':
+            img_pict = Image.open(pict_path)
             img_pict.save(file_path)
+            st.image(file_path)
             
 st.write('Пункт 3.')
 st.write('Зарисуйте полученное изображение чёрно-белой цифры из окошка в бланк отчёта. '
