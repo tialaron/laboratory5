@@ -104,7 +104,7 @@ with col2:
             st.write('Вы можете выбрать любую цифру из предложенных ниже.')
             option1 = st.selectbox('Какую цифру Вы выбираете?',('0','1','2','3','4','5','6','7','8','9'))
             pict_path = '/app/laboratory5/test_pict/foto'+option1+'.png'
-            img = Image.open(pict_path)
+            img_pict = Image.open(pict_path)
             st.image(pict_path)
                   
 
