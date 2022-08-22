@@ -7,7 +7,7 @@ from tensorflow.keras.models import load_model
 
 
 model_2d = load_model('/app/laboratory5/mnist_2d.h5')    
-file_path = '/app/laboratory5/your_file_image.png'
+
 
 #st.set_page_config(layout="wide")
 #st.title("Распознавание рукописных цифр искусственной нейронной сетью (ИНС)")
@@ -92,6 +92,8 @@ st.write('Вам предоставляется на выбор два вари�
 
 #img_file_buffer = st.camera_input("Take a picture")
 
+file_path = '/app/laboratory5/your_file_image.png'
+
 choice1 = st.radio("Видео или готовые изображения?",('Видео', 'Изображения'))
 
 col1,col2 = st.columns(2)
@@ -104,7 +106,7 @@ with col2:
             st.write('Вы можете выбрать любую цифру из предложенных ниже.')
             option1 = st.selectbox('Какую цифру Вы выбираете?',('0','1','2','3','4','5','6','7','8','9'))
             pict_path = '/app/laboratory5/test_pict/foto'+option1+'.png'
-            
+            img_pict = Image.open(pict_path)
             
                   
 
@@ -119,7 +121,7 @@ if choice1 == 'Видео' and img_file_buffer is not None:
             im = Image.fromarray(img_array1)
             im.save(file_path)
 if choice1 == 'Изображения':
-            img_pict = Image.open(pict_path)
+            
             img_pict.save(file_path)
             st.image(file_path)
             
