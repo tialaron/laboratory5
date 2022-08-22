@@ -95,21 +95,6 @@ st.write('Вам предоставляется на выбор два вари�
 file_path = '/app/laboratory5/your_file_image.png'
 
 choice1 = st.radio("Видео или готовые изображения?",('Видео', 'Изображения'))
-
-col1,col2 = st.columns(2)
-with col1:
-            st.write('Одной рукой поднесите цифру к видеокамере так, чтобы она занимала большую часть экрана,'
-                     ' а другой рукой возьмите мышь и щёлкните на кнопку под изображением')
-            img_file_buffer = st.camera_input("Take picture")
-            
-with col2:
-            st.write('Вы можете выбрать любую цифру из предложенных ниже.')
-            option1 = st.selectbox('Какую цифру Вы выбираете?',('0','1','2','3','4','5','6','7','8','9'))
-            pict_path = '/app/laboratory5/test_pict/foto'+option1+'.png'
-            img_pict = Image.open(pict_path)
-            img_pict.save(pict_path)
-                  
-
 if choice1 == 'Видео' and img_file_buffer is not None: 
             img = Image.open(img_file_buffer)
             img_array = np.array(img)
@@ -120,9 +105,35 @@ if choice1 == 'Видео' and img_file_buffer is not None:
             img_array1 = img_array[:, left_border:right_border, :]
             im = Image.fromarray(img_array1)
             im.save(file_path)
-if choice1 == 'Изображения':
-            img_pict.save(file_path)
+
+
+col1,col2 = st.columns(2)
+with col1:
+            st.write('Одной рукой поднесите цифру к видеокамере так, чтобы она занимала большую часть экрана,'
+                     ' а другой рукой возьмите мышь и щёлкните на кнопку под изображением')
+            img_file_buffer = st.camera_input("Take picture")
+            if choice1 == 'Видео' and img_file_buffer is not None: 
+                        img = Image.open(img_file_buffer)
+                        img_array = np.array(img)
+                        img_height, img_width = img_array.shape[0], img_array.shape[1]
+                        img_center = int(img_width / 2)
+                        left_border = int(img_center - img_height / 2)
+                        right_border = int(img_center + img_height / 2)
+                        img_array1 = img_array[:, left_border:right_border, :]
+                        im = Image.fromarray(img_array1)
+                        im.save(file_path)
+            
+with col2:
+            st.write('Вы можете выбрать любую цифру из предложенных ниже.')
+            option1 = st.selectbox('Какую цифру Вы выбираете?',('0','1','2','3','4','5','6','7','8','9'))
+            pict_path = '/app/laboratory5/test_pict/foto'+option1+'.png'
+            img_pict = Image.open(pict_path)
+            img_pict.save(pict_path)
             st.image(file_path)
+            if choice1 == 'Изображения':
+                        img_pict.save(file_path)
+                  
+            
             
 st.write('Пункт 3.')
 st.write('Зарисуйте полученное изображение чёрно-белой цифры из окошка в бланк отчёта. '
